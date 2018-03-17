@@ -1,8 +1,22 @@
-pub struct ThreadPool;
+use std::thread;
+
+pub struct ThreadPool {
+  threads: Vec<thread::JoinHandle<()>>,
+}
 
 impl ThreadPool {
-  pub fn new(size: u32) -> ThreadPool {
-    ThreadPool
+  pub fn new(size: usize) -> ThreadPool {
+    assert!(size > 0);
+
+    let mut threads = Vec::with_capacity(size);
+
+    for _ in 0 .. size {
+      // create & store threads
+    }
+
+    ThreadPool {
+      threads
+    }
   }
 
   pub fn execute<F>(&self, f: F)
